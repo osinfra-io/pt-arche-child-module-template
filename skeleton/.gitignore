@@ -1,0 +1,20 @@
+# .gitignore
+# https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
+
+# Local .tofu directories
+**/.tofu/*
+**/.terraform/*
+
+# Ignore provider lock file
+.tofu.lock.hcl
+.terraform.lock.hcl
+
+# Ignore plan output files
+plan.out
+
+# Other Files
+*.bak
+*.gz
+*.log
+*.swp
+*.tmp

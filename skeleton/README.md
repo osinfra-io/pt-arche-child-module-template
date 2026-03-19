@@ -1,0 +1,61 @@
+# <img align="left" width="45" height="45" src="https://github.com/user-attachments/assets/10b06c7b-be6c-4a0a-be8e-51ef8fe18f0f"> Google Cloud Platform - MODULE_DISPLAY_NAME
+
+[![OpenTofu Tests](https://img.shields.io/github/actions/workflow/status/osinfra-io/MODULE_REPO_NAME/test.yml?style=for-the-badge&logo=opentofu&color=FEDA15&label=OpenTofu%20Tests)](https://github.com/osinfra-io/MODULE_REPO_NAME/actions/workflows/test.yml) [![Dependabot](https://img.shields.io/github/actions/workflow/status/osinfra-io/MODULE_REPO_NAME/dependabot.yml?style=for-the-badge&logo=github&color=2088FF&label=Dependabot)](https://github.com/osinfra-io/MODULE_REPO_NAME/actions/workflows/dependabot.yml) [![Datadog Security Enabled](https://img.shields.io/badge/Datadog%20Security-Enabled-632CA6?style=for-the-badge&logo=datadog)](https://app.datadoghq.com/security/code-security/repositories?repository_id=MODULE_REPO_NAME)
+
+## Repository Description
+
+MODULE_DESCRIPTION
+
+> [!NOTE]
+> We do not recommend consuming this module like you might a [public module](https://search.opentofu.org). It is a baseline, something you can fork, potentially maintain, and modify to fit your organization's needs. Using public modules vs. writing your own has various [drivers and trade-offs](https://docs.osinfra.io/fundamentals/architecture-decision-records/adr-0003) that your organization should evaluate.
+
+## 🔩 Usage
+
+> [!TIP]
+> You can check the [tests/fixtures](tests/fixtures) directory for example configurations. These fixtures set up the system for testing by providing all the necessary initial code, thus creating good examples on which to base your configurations.
+
+Google project services must be enabled before using this module. As a best practice, these should be defined in the [pt-arche-google-project](https://github.com/osinfra-io/pt-arche-google-project) module. The following services are required:
+
+- `example.googleapis.com`
+
+## <img align="left" width="35" height="35" src="https://github.com/user-attachments/assets/eb98a3be-2ffe-4c05-91a4-072fe795a167"> Development
+
+Our focus is on the core fundamental practice of platform engineering, Infrastructure as Code.
+
+>Open Source Infrastructure (as Code) is a development model for infrastructure that focuses on open collaboration and applying relative lessons learned from software development practices that organizations can use internally at scale. - [Open Source Infrastructure (as Code)](https://www.osinfra.io)
+
+To avoid slowing down stream-aligned teams, we want to open up the possibility for contributions. The Open Source Infrastructure (as Code) model allows team members external to the platform team to contribute with only a slight increase in cognitive load. This section is for developers who want to contribute to this repository, describing the tools used, the skills, and the knowledge required, along with OpenTofu documentation.
+
+See the [documentation](https://docs.osinfra.io/fundamentals/development-setup) for setting up a development environment.
+
+### 🛠️ Tools
+
+- [pre-commit](https://github.com/pre-commit/pre-commit)
+- [osinfra-pre-commit-hooks](https://github.com/osinfra-io/pt-techne-pre-commit-hooks)
+
+### 📋 Skills and Knowledge
+
+Links to documentation and other resources required to develop and iterate in this repository successfully.
+
+- [MODULE_DISPLAY_NAME](https://)
+
+### 🔍 Tests
+
+All tests are [mocked](https://opentofu.org/docs/cli/commands/test/#the-mock_provider-blocks) allowing us to test the module without creating infrastructure or requiring credentials. The trade-offs are acceptable in favor of speed and simplicity. In an OpenTofu test, a mocked provider or resource will generate fake data for all computed attributes that would normally be provided by the underlying provider APIs.
+
+```none
+tofu init
+```
+
+```none
+tofu test
+```
+
+### 📦 Release
+
+To release a new version, simply push a new tag to the repository. The tag should be in the format `vX.Y.Z` where `X`, `Y`, and `Z` are integers.
+
+```none
+git tag vX.Y.Z
+git push origin vX.Y.Z
+```

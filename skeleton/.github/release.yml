@@ -1,0 +1,4 @@
+changelog-notes:
+  exclude:
+    labels:
+      - skip-changelog
