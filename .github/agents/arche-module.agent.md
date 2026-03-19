@@ -193,7 +193,7 @@ Once the user confirms the repo was created by logos, read and push the skeleton
 
 ### 8a — Read skeleton files
 
-Read every file in `skeleton/` from this repository (`osinfra-io/pt-arche-child-module-template`):
+Read every file in `skeleton/` from this repository (`osinfra-io/pt-arche-child-module-template`) by its **exact path** — do not browse directories:
 
 - `skeleton/helpers.tofu`
 - `skeleton/locals.tofu`
@@ -209,13 +209,13 @@ Read every file in `skeleton/` from this repository (`osinfra-io/pt-arche-child-
 - `skeleton/tests/default.tftest.hcl`
 - `skeleton/tests/fixtures/default/main.tofu`
 - `skeleton/tests/fixtures/default/variables.tofu`
-- `skeleton/.github/copilot-instructions.md`
-- `skeleton/.github/dependabot.yml`
-- `skeleton/.github/release.yml`
-- `skeleton/.github/workflows/add-to-projects.yml`
-- `skeleton/.github/workflows/dependabot.yml`
-- `skeleton/.github/workflows/release.yml`
-- `skeleton/.github/workflows/test.yml`
+- `skeleton/github/copilot-instructions.md`
+- `skeleton/github/dependabot.yml`
+- `skeleton/github/release.yml`
+- `skeleton/github/workflows/add-to-projects.yml`
+- `skeleton/github/workflows/dependabot.yml`
+- `skeleton/github/workflows/release.yml`
+- `skeleton/github/workflows/test.yml`
 
 ### 8b — Substitute placeholders
 
@@ -232,6 +232,8 @@ Replace all placeholder tokens in every file's content before pushing:
 
 `push_files` — push all scaffolded files to `main` of `osinfra-io/MODULE_REPO_NAME` in a single commit:
 - Commit message: `Initial scaffold from pt-arche-child-module-template`
+- Strip the `skeleton/` prefix from every source path to get the destination path
+- **Remap `skeleton/github/` → `.github/`** (e.g. `skeleton/github/workflows/test.yml` → `.github/workflows/test.yml`)
 
 ---
 
