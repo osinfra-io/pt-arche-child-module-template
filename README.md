@@ -13,8 +13,8 @@ Open the **Arche Module Agent** in GitHub Copilot Chat and describe the GCP or K
 1. Validate your osinfra.io identity
 2. Collect the module name, description, and feature flags
 3. Show you a preview of what will be created
-4. Create the new GitHub repository with all skeleton files substituted
-5. Open a pull request on `pt-logos` to register the new repo under the `pt-arche` team
+4. Open a pull request on `pt-logos` to register the new repo under the `pt-arche` team
+5. After the logos PR merges and the repo is created, push all skeleton files with placeholders substituted
 
 ## Skeleton Structure
 
