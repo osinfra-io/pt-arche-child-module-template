@@ -11,8 +11,8 @@ You are the **Arche Module Agent**. You create new `pt-arche-*` OpenTofu child m
 - Validate the user's osinfra.io identity
 - Collect the details for the new module (name, description, feature flags)
 - Preview exactly what will be created
-- Create the new GitHub repository and push all scaffolded files
-- Open a pull request on `pt-logos` to add the repo to `teams/pt-arche.tfvars`
+- Delegate to the **Logos Agent** to open a PR on `pt-logos` registering the new repo
+- After the logos PR merges and the repo is created, push all scaffolded files
 
 ---
 
@@ -135,42 +135,16 @@ If the user asks for changes, loop back to the relevant step.
 
 Repositories are created by logos via OpenTofu — never directly via the GitHub API.
 
-### 6a — Open PR on pt-logos
+Read the logos agent at `logos/pt-logos/.github/agents/logos.agent.md` and follow its **Operation 3 — Add a repository**, pre-filling all details already collected — skip any questions that have already been answered:
 
-1. Read `teams/pt-arche.tfvars` in `osinfra-io/pt-logos` (get the file SHA)
-2. Insert the new repository entry in alphabetical order within `github_repositories`. Generate HCL following this exact style (copy from an existing entry of similar length):
-
-```hcl
-      "MODULE_REPO_NAME" = {
-        description            = "MODULE_DESCRIPTION"
-        enable_datadog_webhook = true
-
-
-        topics = [
-          "infrastructure-as-code",
-          "opentofu",
-          "opentofu-child-module",
-          "platform-team",
-          "pt-arche"
-        ]
-      }
-```
-
-   Adjust topics based on what the module manages:
-   - Add `"google-cloud-platform"` for GCP modules
-   - Add `"kubernetes"` for Kubernetes modules
-   - Add `"datadog"` for Datadog modules
-   - Add `"helm"` if it uses Helm
-   - Set `enable_datadog_secrets = true` if the user requested it
-   - Set `enable_google_wif_service_account = true` if the user requested it
-   - Omit `enable_datadog_webhook` if false (it defaults to false in logos; only include when true)
-
-3. `create_branch` on `osinfra-io/pt-logos` → `update/pt-arche`
-4. `push_files` — write the updated `teams/pt-arche.tfvars` to the branch
-5. `create_pull_request`:
-   - title: `Update pt-arche: add repository MODULE_REPO_NAME`
-   - body: brief description of what was added
-6. `request_copilot_review`
+- **Team key:** `pt-arche`
+- **Repository name:** the name collected in Step 4b
+- **Description:** the description collected in Step 4c
+- **Topics:** always include `"infrastructure-as-code"`, `"opentofu"`, `"opentofu-child-module"`, `"platform-team"`, `"pt-arche"`; add `"google-cloud-platform"` for GCP modules, `"kubernetes"` for Kubernetes modules, `"datadog"` for Datadog modules, `"helm"` if it uses Helm
+- **enable_datadog_webhook:** from Step 4e
+- **enable_datadog_secrets:** from Step 4e
+- **enable_google_wif_service_account:** from Step 4e
+- **Environments:** none (arche child modules don't have deployment environments)
 
 ---
 
@@ -252,12 +226,6 @@ Replace all placeholder tokens in every file's content before pushing:
 ## Pull request execution rules
 
 Use the GitHub MCP tools for all file and PR operations — never use shell commands, `gh` CLI, or ask the user to run anything locally.
-
-**HCL style rules (strictly enforced):**
-- All blocks and arguments sorted alphabetically (meta-arguments `count`, `depends_on`, `for_each`, `lifecycle`, `provider` first)
-- 2-space indentation throughout
-- Empty line before and after list/map values, unless first or last argument in the block
-- Match the style of existing `teams/pt-arche.tfvars` entries exactly — do not add trailing commas or extra blank lines
 
 ---
 
