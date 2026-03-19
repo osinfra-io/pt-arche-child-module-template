@@ -97,11 +97,11 @@ Ask only once, presenting all three together to keep it brief:
 
 Before creating anything, show a summary and ask for confirmation:
 
-> *"Here's what I'll create:*
+> *"Here's what I'll do:*
 >
-> **New GitHub repository:** `osinfra-io/{repo-name}`
+> **Step 1 — Open a PR on pt-logos** to register `{repo-name}` under the `pt-arche` team. Logos will create the GitHub repository when the PR is merged and the production workflow runs.
 >
-> **Files to scaffold:**
+> **Step 2 — Once you confirm the repo exists**, I'll push these scaffolded files to it:
 > ```
 > helpers.tofu
 > locals.tofu
@@ -126,63 +126,17 @@ Before creating anything, show a summary and ask for confirmation:
 > .github/workflows/test.yml
 > ```
 >
-> **Pull request on pt-logos** to add `{repo-name}` to `teams/pt-arche.tfvars`
->
 > *Ready to proceed?"*
 
 If the user asks for changes, loop back to the relevant step.
 
 ---
 
-## Step 6 — Scaffold
+## Step 6 — Open PR on pt-logos
 
-### 6a — Read skeleton files
+Repositories are created by logos via OpenTofu — never directly via the GitHub API.
 
-Read every file in `skeleton/` from this repository (`osinfra-io/pt-arche-child-module-template`):
-
-- `skeleton/helpers.tofu`
-- `skeleton/locals.tofu`
-- `skeleton/main.tofu`
-- `skeleton/outputs.tofu`
-- `skeleton/providers.tofu`
-- `skeleton/variables.tofu`
-- `skeleton/README.md`
-- `skeleton/SECURITY.md`
-- `skeleton/.gitignore`
-- `skeleton/.pre-commit-config.yaml`
-- `skeleton/static-analysis.datadog.yml`
-- `skeleton/tests/default.tftest.hcl`
-- `skeleton/tests/fixtures/default/main.tofu`
-- `skeleton/tests/fixtures/default/variables.tofu`
-- `skeleton/.github/copilot-instructions.md`
-- `skeleton/.github/dependabot.yml`
-- `skeleton/.github/release.yml`
-- `skeleton/.github/workflows/add-to-projects.yml`
-- `skeleton/.github/workflows/dependabot.yml`
-- `skeleton/.github/workflows/release.yml`
-- `skeleton/.github/workflows/test.yml`
-
-### 6b — Substitute placeholders
-
-Replace all placeholder tokens in every file's content before pushing:
-
-| Placeholder | Replace with |
-| --- | --- |
-| `MODULE_REPO_NAME` | The full repo name, e.g. `pt-arche-google-cloud-run` |
-| `MODULE_SHORT_NAME` | The name without the `pt-arche-` prefix, e.g. `google-cloud-run` |
-| `MODULE_DESCRIPTION` | The one-sentence description provided by the user |
-| `MODULE_DISPLAY_NAME` | Title-cased display name for README headings, e.g. `Google Cloud Run` |
-
-### 6c — Create the repository and push files
-
-1. `create_repository` — create `osinfra-io/MODULE_REPO_NAME` with:
-   - `description`: the user-provided description
-   - `private`: false
-   - `autoInit`: false
-2. `push_files` — push all scaffolded files in a single commit to `main`:
-   - Commit message: `Initial scaffold from pt-arche-child-module-template`
-
-### 6d — Open PR on pt-logos
+### 6a — Open PR on pt-logos
 
 1. Read `teams/pt-arche.tfvars` in `osinfra-io/pt-logos` (get the file SHA)
 2. Insert the new repository entry in alphabetical order within `github_repositories`. Generate HCL following this exact style (copy from an existing entry of similar length):
@@ -221,20 +175,76 @@ Replace all placeholder tokens in every file's content before pushing:
 
 ---
 
-## Step 7 — Completion
+## Step 7 — Wait for logos to create the repo
 
-Share both links clearly:
+After opening the logos PR, tell the user:
 
-> *"✅ All done! Here's what was created:*
+> *"🔀 Logos PR opened: {pr-url}*
+>
+> *Once that PR is merged and the `pt-logos` production workflow runs, logos will create the `MODULE_REPO_NAME` repository. Let me know when that's done and I'll scaffold all the module files into the new repo.*"
+
+Wait for the user to confirm the repo exists before continuing.
+
+---
+
+## Step 8 — Scaffold the module files
+
+Once the user confirms the repo was created by logos, read and push the skeleton files.
+
+### 8a — Read skeleton files
+
+Read every file in `skeleton/` from this repository (`osinfra-io/pt-arche-child-module-template`):
+
+- `skeleton/helpers.tofu`
+- `skeleton/locals.tofu`
+- `skeleton/main.tofu`
+- `skeleton/outputs.tofu`
+- `skeleton/providers.tofu`
+- `skeleton/variables.tofu`
+- `skeleton/README.md`
+- `skeleton/SECURITY.md`
+- `skeleton/.gitignore`
+- `skeleton/.pre-commit-config.yaml`
+- `skeleton/static-analysis.datadog.yml`
+- `skeleton/tests/default.tftest.hcl`
+- `skeleton/tests/fixtures/default/main.tofu`
+- `skeleton/tests/fixtures/default/variables.tofu`
+- `skeleton/.github/copilot-instructions.md`
+- `skeleton/.github/dependabot.yml`
+- `skeleton/.github/release.yml`
+- `skeleton/.github/workflows/add-to-projects.yml`
+- `skeleton/.github/workflows/dependabot.yml`
+- `skeleton/.github/workflows/release.yml`
+- `skeleton/.github/workflows/test.yml`
+
+### 8b — Substitute placeholders
+
+Replace all placeholder tokens in every file's content before pushing:
+
+| Placeholder | Replace with |
+| --- | --- |
+| `MODULE_REPO_NAME` | The full repo name, e.g. `pt-arche-google-cloud-run` |
+| `MODULE_SHORT_NAME` | The name without the `pt-arche-` prefix, e.g. `google-cloud-run` |
+| `MODULE_DESCRIPTION` | The one-sentence description provided by the user |
+| `MODULE_DISPLAY_NAME` | Title-cased display name for README headings, e.g. `Google Cloud Run` |
+
+### 8c — Push skeleton files
+
+`push_files` — push all scaffolded files to `main` of `osinfra-io/MODULE_REPO_NAME` in a single commit:
+- Commit message: `Initial scaffold from pt-arche-child-module-template`
+
+---
+
+## Step 9 — Completion
+
+> *"✅ All done!*
 >
 > *📦 New module repo: https://github.com/osinfra-io/MODULE_REPO_NAME*
-> *🔀 Logos PR: {pr-url}*
 >
 > *Next steps:*
-> *1. Add your resource code to `main.tofu`, `locals.tofu`, `variables.tofu`, and `outputs.tofu` in the new repo.*
+> *1. Add your resource code to `main.tofu`, `locals.tofu`, `variables.tofu`, and `outputs.tofu`.*
 > *2. Update `tests/default.tftest.hcl` with any `mock_resource` overrides for computed attributes your resources produce.*
-> *3. Merge the logos PR once the repo is ready to be officially managed by pt-logos.*
-> *4. Tag a `v0.1.0` release once the initial code is merged.*
+> *3. Tag a `v0.1.0` release once the initial code is merged.*
 >
 > *Need anything else?"*
 
