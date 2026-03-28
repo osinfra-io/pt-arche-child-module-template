@@ -6,6 +6,6 @@
 #
 # resource "google_example_resource" "this" {
 #   labels  = var.labels
-#   name    = "MODULE_SHORT_NAME-${module.helpers.env}"
+#   name    = "MODULE_SHORT_NAME-${module.core_helpers.env}"
 #   project = var.project_id
 # }
