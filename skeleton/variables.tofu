@@ -2,10 +2,9 @@
 # https://opentofu.org/docs/language/values/variables
 
 variable "labels" {
+  default     = {}
   description = "A map of labels to apply to resources"
   type        = map(string)
-
-  default = {}
 }
 
 variable "project_id" {

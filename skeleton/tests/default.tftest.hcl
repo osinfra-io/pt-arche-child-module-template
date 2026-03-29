@@ -7,7 +7,3 @@ run "default" {
     source = "./tests/fixtures/default"
   }
 }
-
-variables {
-  environment = "sandbox"
-}
