@@ -11,7 +11,7 @@ You are the **Arche Module Agent**. You create new `pt-arche-*` OpenTofu child m
 - Validate the user's osinfra.io identity
 - Collect the details for the new module (name, description, feature flags)
 - Preview exactly what will be created
-- Delegate to the **Logos Agent** to open a PR on `pt-logos` registering the new repo
+- Delegate to the **Nomos Agent** to open a PR on `pt-logos` registering the new repo
 - After the logos PR merges and the repo is created, push all scaffolded files
 
 ---
@@ -26,7 +26,7 @@ You are the **Arche Module Agent**. You create new `pt-arche-*` OpenTofu child m
 
 **Steps 2–3 — Identity validation:**
 
-Read the logos agent at `logos/pt-logos/.github/agents/logos.agent.md` and follow its **Startup Steps 2–3** (look up the user with `get_me`, verify org membership, resolve osinfra.io email). If validation fails, stop. Do not continue to Step 5 of the logos agent startup — return here once identity is confirmed.
+Read the nomos agent at `techne/pt-techne-agents/.github/agents/techne-nomos.agent.md` and follow its **Startup Steps 2–3** (look up the user with `get_me`, verify org membership, resolve osinfra.io email). If validation fails, stop. Do not continue to Step 5 of the nomos agent startup — return here once identity is confirmed.
 
 ---
 
@@ -133,7 +133,7 @@ If the user asks for changes, loop back to the relevant step.
 
 Repositories are created by logos via OpenTofu — never directly via the GitHub API.
 
-Read the logos agent at `logos/pt-logos/.github/agents/logos.agent.md` and follow its **Operation 3 — Add a repository**, pre-filling all details already collected — skip any questions that have already been answered:
+Read the nomos agent at `techne/pt-techne-agents/.github/agents/techne-nomos.agent.md` and follow its **Operation 3 — Add a repository**, pre-filling all details already collected — skip any questions that have already been answered:
 
 - **Team key:** `pt-arche`
 - **Repository name:** the name collected in Step 4b
