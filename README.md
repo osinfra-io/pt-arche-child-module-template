@@ -1,4 +1,4 @@
-# <img align="left" width="45" height="45" src="https://github.com/user-attachments/assets/10b06c7b-be6c-4a0a-be8e-51ef8fe18f0f"> pt-arche-child-module-template
+# pt-arche-child-module-template
 
 [![Copilot Agent](https://img.shields.io/badge/Copilot%20Agent-Enabled-6E40C9?style=for-the-badge&logo=githubcopilot&logoColor=white)](https://github.com/osinfra-io/pt-arche-child-module-template/tree/main/.github/agents) [![Datadog Security Enabled](https://img.shields.io/badge/Datadog%20Security-Enabled-632CA6?style=for-the-badge&logo=datadog)](https://app.datadoghq.com/security/code-security/repositories?repository_id=pt-arche-child-module-template)
 
