@@ -11,7 +11,7 @@ repos:
       - id: check-symlinks
 
   - repo: https://github.com/osinfra-io/pt-techne-pre-commit-hooks
-    rev: ba4ad1161f9c942c225e9e8faa0a988870a8f3af # frozen: v0.1.4
+    rev: 532fe5510ff7cf28413136620aff270bb4d0905b  # frozen: v0.2.7
     hooks:
       - id: tofu-fmt
         verbose: true
@@ -22,6 +22,9 @@ repos:
       # export TF_PLUGIN_CACHE_DIR=$HOME/.opentofu.d/plugin-cache
 
       - id: tofu-validate
+        verbose: true
+
+      - id: tofu-lint
         verbose: true
 
       - id: tofu-test
