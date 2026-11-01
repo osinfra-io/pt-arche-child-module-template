@@ -78,12 +78,11 @@ If yes:
 
 ### 4e — Feature flags
 
-Ask only once, presenting all three together to keep it brief:
+Ask only once, presenting both together to keep it brief:
 
 > *"A few quick flags for the logos configuration — I've set the defaults, just let me know if you want anything different:*
 >
-> - `enable_datadog_webhook`: **true** (sends repo events to Datadog)
-> - `enable_datadog_secrets`: **false** (adds DD_API_KEY/DD_APP_KEY as repo secrets)
+> - `enable_datadog_secrets`: **false** (adds DD_API_KEY/DD_APP_KEY as repo secrets; only needed if the module's workflows call the Datadog API, e.g. OpenTofu defining Datadog resources)
 > - `enable_google_wif_service_account`: **false** (OIDC Workload Identity Federation for GCP deploys)*
 >
 > *Any changes?"*
@@ -139,7 +138,6 @@ Read the nomos agent at `techne/pt-techne-agents/.github/agents/nomos.agent.md` 
 - **Repository name:** the name collected in Step 4b
 - **Description:** the description collected in Step 4c
 - **Topics:** always include `"infrastructure-as-code"`, `"opentofu"`, `"opentofu-child-module"`, `"platform-team"`, `"pt-arche"`; add `"google-cloud-platform"` for GCP modules, `"kubernetes"` for Kubernetes modules, `"datadog"` for Datadog modules, `"helm"` if it uses Helm
-- **enable_datadog_webhook:** from Step 4e
 - **enable_datadog_secrets:** from Step 4e
 - **enable_google_wif_service_account:** from Step 4e
 - **Environments:** none (arche child modules don't have deployment environments)
